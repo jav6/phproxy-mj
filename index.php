@@ -74,7 +74,7 @@ $_system            = array
                         'ssl'          => extension_loaded('openssl') && version_compare(PHP_VERSION, '4.3.0', '>='),
                         'uploads'      => ini_get('file_uploads'),
                         'gzip'         => extension_loaded('zlib') && !ini_get('zlib.output_compression'),
-                        'stripslashes' => get_magic_quotes_gpc()
+                        //'stripslashes' => get_magic_quotes_gpc()
                     );
 $_proxify           = array('text/html' => 1, 'application/xml+xhtml' => 1, 'application/xhtml+xml' => 1, 'text/css' => 1);
 $_version           = '0.5b201';
@@ -189,7 +189,7 @@ function url_parse($url, & $container)
             }
             else if ($dir !== '.')
             {
-                for ($dir = rawurldecode($dir), $new_dir = '', $i = 0, $count_i = strlen($dir); $i < $count_i; $new_dir .= strspn($dir{$i}, 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$-_.+!*\'(),?:@&;=') ? $dir{$i} : rawurlencode($dir{$i}), ++$i);
+                for ($dir = rawurldecode($dir), $new_dir = '', $i = 0, $count_i = strlen($dir); $i < $count_i; $new_dir .= strspn($dir($i), 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$-_.+!*\'(),?:@&;=') ? $dir($i) : rawurlencode($dir($i)), ++$i);
                 $path[] = $new_dir;
             }
         }
@@ -380,17 +380,17 @@ if ($_config['compress_output'] && $_system['gzip'])
 // STRIP SLASHES FROM GPC IF NECESSARY
 //
 
-if ($_system['stripslashes'])
-{
-    function _stripslashes($value)
-    {
-        return is_array($value) ? array_map('_stripslashes', $value) : (is_string($value) ? stripslashes($value) : $value);
-    }
+// if ($_system['stripslashes'])
+// {
+//     function _stripslashes($value)
+//     {
+//         return is_array($value) ? array_map('_stripslashes', $value) : (is_string($value) ? stripslashes($value) : $value);
+//     }
     
-    $_GET    = _stripslashes($_GET);
-    $_POST   = _stripslashes($_POST);
-    $_COOKIE = _stripslashes($_COOKIE);
-}
+//     $_GET    = _stripslashes($_GET);
+//     $_POST   = _stripslashes($_POST);
+//     $_COOKIE = _stripslashes($_COOKIE);
+// }
 
 //
 // FIGURE OUT WHAT TO DO (POST URL-form submit, GET form request, regular request, basic auth, cookie manager, show URL-form)
@@ -598,7 +598,7 @@ do
     {
         $_request_headers  .= "Authorization: Basic {$_auth_creds[$_basic_auth_realm]}\r\n";
     }
-    else if (list($_basic_auth_realm, $_basic_auth_header) = each($_auth_creds))
+    else if (list($_basic_auth_realm, $_basic_auth_header) = [key($_auth_creds), current($_auth_creds)] /*each($_auth_creds)*/)
     {
         $_request_headers .= "Authorization: Basic {$_basic_auth_header}\r\n";
     }
