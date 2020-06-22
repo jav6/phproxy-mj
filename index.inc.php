@@ -16,7 +16,7 @@ if (basename(__FILE__) == basename($_SERVER['PHP_SELF']))
 <div id="container">
   <br />
 <center>
-<h1>PhProxy-MJ run with Php Ver: 5.6.38</h1>
+<h1>PhProxy-MJ</h1>
 </center>
 <?php
 switch ($data['category'])
@@ -119,7 +119,7 @@ switch ($data['category'])
   <div id="lnks">
     <br />
   </div>
-  <h3>Edit & Upgrade by Mohammad Javidi Ver : 0.1</h3>
+  <h3>Edit & Upgrade by Mohammad Javidi Ver : 1.1</h3>
   <hr />
   <h3>Created by Abdullah Arif => Last Modified  | 5:27 PM 1/20/2007 <br /> he Created in php version 5 or lower than that</h3>
   <br />
