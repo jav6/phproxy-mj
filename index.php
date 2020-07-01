@@ -222,7 +222,7 @@ function complete_url($url, $proxify = true)
     
     if ($sep_pos === false || $sep_pos > 5)
     {
-        switch ($url{0})
+        switch ($url[0])
         {
             case '/':
                 $url = substr($url, 0, 2) === '//' ? $GLOBALS['_base']['scheme'] . ':' . $url : $GLOBALS['_base']['scheme'] . '://' . $GLOBALS['_base']['host'] . $GLOBALS['_base']['port_ext'] . $url;
@@ -320,7 +320,7 @@ if ($_iflags !== '')
 
     foreach ($_flags as $flag_name => $flag_value)
     {
-        $_flags[$flag_name] = $_frozen_flags[$flag_name] ? $flag_value : (int)(bool)$_iflags{$i};
+        $_flags[$flag_name] = $_frozen_flags[$flag_name] ? $flag_value : (int)(bool)$_iflags[$i];
         $i++;
     }
 }
@@ -720,7 +720,7 @@ do
             {
                 $domain = '.' . strtolower(str_replace('..', '.', trim($domain, '.')));
     
-                if ((!preg_match('#\Q' . $domain . '\E$#i', $_url_parts['host']) && $domain != '.' . $_url_parts['host']) || (substr_count($domain, '.') < 2 && $domain{0} == '.'))
+                if ((!preg_match('#\Q' . $domain . '\E$#i', $_url_parts['host']) && $domain != '.' . $_url_parts['host']) || (substr_count($domain, '.') < 2 && $domain[0] == '.'))
                 {
                     continue;
                 }
@@ -827,7 +827,7 @@ if (!isset($_proxify[$_content_type]))
         $data = fread($_socket, 8192);
         echo $data;
     }
-    while (isset($data{0}));
+    while (isset($data[0]));
         
     fclose($_socket);
     exit(0);
@@ -838,7 +838,7 @@ do
     $data = @fread($_socket, 8192); // silenced to avoid the "normal" warning by a faulty SSL connection
     $_response_body .= $data;
 }   
-while (isset($data{0}));
+while (isset($data[0]));
    
 unset($data);
 fclose($_socket);
